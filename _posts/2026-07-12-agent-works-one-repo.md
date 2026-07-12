@@ -2,6 +2,7 @@
 title: "Agent works one repo at a time. Work doesn't."
 date: 2026-07-12
 tags: ai devtools git llm
+image: /assets/img/one-repo-og-1200.jpg
 ---
 
 I support features across multiple repos. Backend, contract, frontend — three repos, one feature. Monorepo? Too expensive. Too much migration. I had to make polyrepo work with an agent.
@@ -50,7 +51,7 @@ project-root/
 
 The worktrees are real directories, but they share the pool's git objects — so spinning up a workspace is near-instant and throwing one away costs nothing.
 
-When the backend, contract, and frontend sit in the same real tree, three things unlock:
+When the backend, contract, and frontend sit in the same real tree, four things unlock:
 
 **Cross-repo context consistency.** One agent, one workspace — every repo it pulls in shares the same context. The agent changes the backend, sees the result immediately in the frontend. No copy-pasting, no re-explaining, no switching tools. Full git history — blame, log, branch topology — across every repo. The context bridge is gone.
 
@@ -71,6 +72,15 @@ Running real tasks on it surfaced the things the design never told me. Some I've
 - **Open — it's bash, and "bash script" makes people flinch.** The zero-infra story is a feature: no runtime, no daemon, just git and files. But "reliability of a bash script" is a fair question, and it's the first thing a contributor asks. The spec is detailed enough to be implementation-independent, so the open test is whether the whole thing reimplements in Go with zero friction — a single static binary, still zero-infra. If it does, that proves the spec is a model, not a script.
 
 The concept — a workspace where agent context spans multiple repos as real, editable, history-bearing source — is the thing. Orbit is one prototype of it.
+
+If you want to see the shape for yourself, this drops you into a demo workspace where one change has to land in two repos in lockstep — the exact problem this article started with:
+
+```bash
+curl -sL https://raw.githubusercontent.com/orbcli/orbit/main/examples/demo/try.sh \
+  | bash -s -- --claude
+```
+
+Swap `--claude` for `--qodercli`, or drop it entirely to install just the runtime for any other agent. Clean up with `rm -rf ~/orbit-try`.
 
 ---
 
