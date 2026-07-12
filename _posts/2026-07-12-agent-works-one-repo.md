@@ -5,7 +5,7 @@ tags: ai devtools git llm
 image: /assets/img/one-repo-og-1200.jpg
 ---
 
-I support features across multiple repos. Backend, contract, frontend — three repos, one feature. Monorepo? Too expensive. Too much migration. I had to make polyrepo work with an agent.
+I support features across multiple repos. Backend, contract, frontend — three repos, one feature. Monorepo? Too expensive. Too much migration. I had to make polyrepo work with an agent. This is the path I took to get there — it ended in a small open-source tool called [Orbit](https://github.com/orbcli/orbit), but the tool is the last step, not the point.
 
 ## Attempt 1: copy-paste
 
@@ -81,6 +81,8 @@ curl -sL https://raw.githubusercontent.com/orbcli/orbit/main/examples/demo/try.s
 ```
 
 Swap `--claude` for `--qodercli`, or drop it entirely to install just the runtime for any other agent. Clean up with `rm -rf ~/orbit-try`.
+
+The source, issues, and roadmap all live on GitHub: [github.com/orbcli/orbit](https://github.com/orbcli/orbit).
 
 ---
 
